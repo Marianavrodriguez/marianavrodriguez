@@ -2,51 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mariana V Rodriguez | Portfolio</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Mariana V. Rodriguez – Graphic Designer & Photographer">
+  <title>Mariana V. Rodriguez</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f9f4f2;
+      font-family: 'Raleway', sans-serif;
+    }
+    .floating-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 0;
+      display: flex;
+      justify-content: space-evenly;
+    }
+    .floating-lines div {
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  </style>
 </head>
-<body>
-  <header>
-    <div class="container">
-      <h1>Mariana V Rodriguez</h1>
-      <p>Graphic Designer & Photographer</p>
-      <nav>
-        <a href="#portfolio">Portfolio</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
+<body class="relative overflow-hidden">
+  <!-- Background Vertical Lines -->
+  <div class="floating-lines">
+    <div></div><div></div><div></div><div></div><div></div><div></div>
+  </div>
+
+  <!-- Lottie Cloud Animation -->
+  <div class="absolute top-0 left-0 w-full h-[120vh] -z-10 opacity-50">
+    <lottie-player
+      src="https://cdn.prod.website-files.com/6009e376ed9e3b5cf272ae7f/633517662918e28301b14938_new%20cloud%20no%20wiggle%20v3%20vertical.json"
+      background="transparent"
+      speed="1"
+      loop
+      autoplay
+      style="width: 100%; height: 100%; object-fit: cover;"
+    ></lottie-player>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex flex-col items-center justify-center text-center p-6 z-10 relative">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Mariana V. Rodriguez</h1>
+    <p class="text-lg md:text-xl max-w-xl mb-8">
+      Graphic Designer & Photographer crafting visual stories through minimalist design and vivid photography.
+    </p>
+    <div class="flex gap-4">
+      <a href="#contact" class="px-6 py-3 bg-purple-700 text-white rounded-full hover:bg-purple-800 transition">Get in Touch</a>
+      <a href="#projects" class="px-6 py-3 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition">See Portfolio</a>
     </div>
-  </header>
+  </section>
 
-  <section id="hero">
-    <div class="container">
-      <h2>Visuals that Speak Louder</h2>
-      <p>Bold design, sharp photography, and a passion for creating.</p>
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-6 bg-white relative z-10">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-12">Selected Projects</h2>
+      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <!-- Project Card -->
+        <div class="bg-[#fefefe] rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg hover:-translate-y-1 duration-300">
+          <div class="h-48 bg-gray-200 flex items-center justify-center">
+            <span class="text-gray-500">Image Placeholder</span>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">Project Title One</h3>
+            <p class="text-gray-600">Brief description about the project goes here. Tools used, purpose, results.</p>
+          </div>
+        </div>
+
+        <!-- Project Card -->
+        <div class="bg-[#fefefe] rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg hover:-translate-y-1 duration-300">
+          <div class="h-48 bg-gray-200 flex items-center justify-center">
+            <span class="text-gray-500">Image Placeholder</span>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">Project Title Two</h3>
+            <p class="text-gray-600">Another description for a second portfolio piece. Highlight your creative input.</p>
+          </div>
+        </div>
+
+        <!-- Project Card -->
+        <div class="bg-[#fefefe] rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg hover:-translate-y-1 duration-300">
+          <div class="h-48 bg-gray-200 flex items-center justify-center">
+            <span class="text-gray-500">Image Placeholder</span>
+          </div>
+          <div class="p-5">
+            <h3 class="text-xl font-semibold mb-2">Project Title Three</h3>
+            <p class="text-gray-600">Short blurb about this third project. Describe the goal and outcome.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-
-  <section id="portfolio" class="container">
-    <h2>My Work</h2>
-    <div class="grid">
-      <img src="images/project1.jpg" alt="Project 1">
-      <img src="images/project2.jpg" alt="Project 2">
-      <img src="images/project3.jpg" alt="Project 3">
-    </div>
-  </section>
-
-  <section id="about" class="container">
-    <h2>About Me</h2>
-    <p>I'm a Barcelona-based creative blending bold graphic design with storytelling photography. Let's create something amazing together.</p>
-  </section>
-
-  <section id="contact" class="container">
-    <h2>Contact</h2>
-    <p>Let's work together! Reach me at <a href="mailto:your.email@example.com">marianavictoriarod@gmail.com</a></p>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 Azero Creative. All rights reserved.</p>
-  </footer>
 </body>
 </html>
