@@ -1,123 +1,242 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Mariana V. Rodriguez – Graphic Designer & Photographer">
-  <title>Mariana V. Rodriguez</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Mariana V. Rodriguez — Brand Designer & Creative Director</title>
+  <meta name="description" content="Brand designer and creative director based in Barcelona. Building identities that stand for something.">
+  <meta property="og:title" content="Mariana V. Rodriguez — Brand Designer">
+  <meta property="og:description" content="Brands with something to say. Based in Barcelona.">
+  <meta property="og:url" content="https://marianavrodriguez.com">
+  <meta property="og:type" content="website">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=SUSE:wght@100..800&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background-color: #2973B2;
-      font-family: 'Josefin Sans', sans-serif;
-    }
-    .floating-lines {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      z-index: 0;
-      display: flex;
-      justify-content: space-evenly;
-    }
-    .floating-lines div {
-      width: 1px;
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    .reveal-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&text=%E2%86%92&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="relative overflow-hidden">
-  <!-- Background Vertical Lines -->
-  <div class="floating-lines">
-    <div></div><div></div><div></div><div></div><div></div><div></div>
-  </div>
+<body>
 
- <!-- Hero Section -->
-  <section class="relative py-8 md:py-14 flex flex-col items-center justify-center text-center px-4 md:px-6 overflow-hidden min-h-[350px]">
-    <!-- Inline SVG Background -->
-   <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-[95vw] max-w-[650px] h-auto h-[180px] sm:h-[240px] md:h-[300px] -z-10 pointer-events-none opacity-100">
-  <svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" width="600" height="430" viewBox="0 0 1186 851" class="w-full h-auto">
-    <defs>
-      <style>
-        .cls-1{fill:#9acbd0;}
-        .cls-2{fill:#f2efe7;}
-      </style>
-    </defs>
-    <g id="Layer_1-2">
-      <rect class="cls-1" x="47" y="47" width="1139" height="804"/>
-      <rect class="cls-2" width="1169" height="834"/>
-    </g>
-  </svg>
-</div>
+  <div class="cursor" id="cursor" aria-hidden="true">&rarr;</div>
 
-    <!-- Hero Content -->
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 z-10 relative">Mariana V. Rodriguez</h1>
-    <p class="text-base sm:text-lg md:text-xl max-w-2xl mb-6 z-10 relative">
-      Graphic Designer & Photographer crafting visual stories through minimalist design and vivid photography.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 z-10 relative">
-      <a href="#contact" class="px-6 py-3 bg-purple-700 text-white rounded-full hover:bg-purple-800 transition text-center">Get in Touch</a>
-      <a href="#projects" class="px-6 py-3 bg-yellow-400 text-black rounded-full hover:bg-yellow-500 transition text-center">See Portfolio</a>
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-name">
+        <span id="nav-text"></span><span class="nav-cursor" id="nav-cursor">_</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#projects">Work</a>
+        <a href="photography.html">Photography</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav-mobile" id="nav-mobile">
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#projects">Work</a>
+      <a href="photography.html">Photography</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <h1 class="hero-title reveal">Hi! I build brands from scratch</h1>
+      <p class="hero-sub reveal">Multidisciplinary designer. I build brands with intention and an open-minded approach.</p>
+      <div class="hero-ctas reveal">
+        <a href="#projects" class="btn-primary">View work</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- MARQUEE — pinned to the bottom of the hero so part of it is
+         visible on load; sizing/looping is rebuilt in script.js off
+         the strip's actual rendered pixel size, not viewBox width,
+         so the text stays legible on narrow screens. -->
+    <div class="marquee-wrap" aria-hidden="true">
+      <svg class="marquee-svg" viewBox="0 0 1920 160" preserveAspectRatio="xMidYMid meet">
+        <path id="marquee-path" fill="none"
+          d="M -480,90
+             c 160,-70 320,-70 480,0 c 160,70 320,70 480,0
+             c 160,-70 320,-70 480,0 c 160,70 320,70 480,0
+             c 160,-70 320,-70 480,0 c 160,70 320,70 480,0" />
+        <text class="marquee-text">
+          <textPath id="marquee-textpath" href="#marquee-path" startOffset="0%">BRAND STRATEGY&nbsp;&nbsp;•&nbsp;&nbsp;VISUAL DESIGN&nbsp;&nbsp;•&nbsp;&nbsp;PHOTOGRAPHY&nbsp;&nbsp;•&nbsp;&nbsp;CREATIVE DIRECTION&nbsp;&nbsp;•&nbsp;&nbsp;GRAPHIC DESIGN&nbsp;&nbsp;•&nbsp;&nbsp;CONTENT CREATION&nbsp;&nbsp;•&nbsp;&nbsp;</textPath>
+        </text>
+      </svg>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-20 px-6 bg-white relative z-10">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-[800] text-center mb-12 reveal">Selected Projects</h2>
-      <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Project Card -->
-        <div class="bg-[#fefefe] rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg hover:-translate-y-1 duration-300 reveal">
-          <img src="https://source.unsplash.com/600x400/?design,art" alt="Project One" class="w-full h-48 object-cover">
-          <div class="p-5">
-            <h3 class="text-xl font-semibold mb-2">Project Title One</h3>
-            <p class="text-gray-600">Brief description about the project goes here. Tools used, purpose, results.</p>
-          </div>
-        </div>
+  <!-- WORK / CATEGORIES -->
+  <section class="work" id="work">
+    <svg class="work-wave" viewBox="0 0 1920 420" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,180 C 320,280 480,60 800,140 C 1120,220 1280,40 1600,120 C 1760,160 1840,190 1920,170 L1920,420 L0,420 Z" fill="#2C2F49"></path>
+    </svg>
+    <div class="work-inner">
 
-        <!-- Project Card -->
-        <div class="bg-[#fefefe] rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg hover:-translate-y-1 duration-300 reveal">
-          <img src="https://source.unsplash.com/600x400/?creative,portfolio" alt="Project Two" class="w-full h-48 object-cover">
-          <div class="p-5">
-            <h3 class="text-xl font-semibold mb-2">Project Title Two</h3>
-            <p class="text-gray-600">Another description for a second portfolio piece. Highlight your creative input.</p>
-          </div>
-        </div>
+      <div class="category-image" id="cat-image-wrap">
+        <img id="cat-img" src="images/cat-visual-identity.jpg" alt="" onerror="this.style.opacity='0'">
+      </div>
 
-        <!-- Project Card -->
-        <div class="bg-[#fefefe] rounded-2xl shadow-md border border-gray-200 overflow-hidden transition hover:shadow-lg hover:-translate-y-1 duration-300 reveal">
-          <img src="https://source.unsplash.com/600x400/?photography,layout" alt="Project Three" class="w-full h-48 object-cover">
-          <div class="p-5">
-            <h3 class="text-xl font-semibold mb-2">Project Title Three</h3>
-            <p class="text-gray-600">Short blurb about this third project. Describe the goal and outcome.</p>
+      <div class="category-list">
+        <p class="category-eyebrow">What I do</p>
+        <div class="cat-item active" data-img="images/cat-visual-identity.jpg">
+          <span class="cat-arrow" aria-hidden="true">→</span>
+          <span class="cat-label">Visual Identities</span>
+        </div>
+        <div class="cat-item" data-img="images/cat-creative-direction.jpg">
+          <span class="cat-arrow" aria-hidden="true">→</span>
+          <span class="cat-label">Creative Direction</span>
+        </div>
+        <div class="cat-item" data-img="images/cat-graphic-design.jpg">
+          <span class="cat-arrow" aria-hidden="true">→</span>
+          <span class="cat-label">Graphic Design</span>
+        </div>
+        <div class="cat-item" data-img="images/cat-photography.jpg">
+          <span class="cat-arrow" aria-hidden="true">→</span>
+          <span class="cat-label">Photography</span>
+        </div>
+        <div class="cat-item" data-img="images/cat-content.jpg">
+          <span class="cat-arrow" aria-hidden="true">→</span>
+          <span class="cat-label">Content Creation</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECT CARDS -->
+  <section class="projects" id="projects">
+    <div class="projects-grid">
+
+      <article class="project-card reveal">
+        <a href="mod.html" class="card-link">
+          <div class="card-image" style="--ph:#002D26">
+            <img src="images/mod.jpg" alt="mod." loading="lazy" onerror="this.style.opacity='0'">
+            <div class="card-overlay">
+              <p class="overlay-desc">Naming and visual identity for a specialty coffee corner inside Urbany Hostels Barcelona. Cups already in use.</p>
+              <span class="overlay-btn">View project →</span>
+            </div>
           </div>
+          <div class="card-meta">
+            <p class="card-title">mod.</p>
+            <p class="card-desc">Naming and visual identity for a specialty coffee corner inside Urbany Hostels.</p>
+            <div class="card-tags">
+              <span class="tag">Naming</span>
+              <span class="tag">Visual Identity</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card reveal">
+        <a href="gruprv.html" class="card-link">
+          <div class="card-image" style="--ph:#0F1A2E">
+            <img src="images/gruprv.jpg" alt="GrupRV" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="card-overlay">
+              <p class="overlay-desc">Brand evolution for a 50-year hospitality holding company — stripping away visual noise into one confident mark.</p>
+              <span class="overlay-btn">View project →</span>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-title">GrupRV</p>
+            <p class="card-desc">Brand evolution for a 50-year hospitality holding company.</p>
+            <div class="card-tags">
+              <span class="tag">Branding</span>
+              <span class="tag">Brand Strategy</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card reveal">
+        <a href="urbany.html" class="card-link">
+          <div class="card-image" style="--ph:#1E0800">
+            <img src="images/urbany.jpg" alt="Urbany Hostels" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="card-overlay">
+              <p class="overlay-desc">Built the complete visual language — illustration style, signage, menus and posters — still running across all properties today.</p>
+              <span class="overlay-btn">View project →</span>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-title">Urbany Hostels</p>
+            <p class="card-desc">Complete visual language — illustration, signage, menus and posters — still running today.</p>
+            <div class="card-tags">
+              <span class="tag">Branding</span>
+              <span class="tag">Creative Direction</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card reveal">
+        <a href="bodasrv.html" class="card-link">
+          <div class="card-image" style="--ph:#1A0E08">
+            <img src="images/bodasrv.jpg" alt="Bodas RV" loading="lazy" onerror="this.style.opacity='0'">
+            <div class="card-overlay">
+              <p class="overlay-desc">Full brand identity for a wedding brand — logo suite, print, digital, and campaigns. +46% web conversions since launch.</p>
+              <span class="overlay-btn">View project →</span>
+            </div>
+          </div>
+          <div class="card-meta">
+            <p class="card-title">Bodas RV</p>
+            <p class="card-desc">Full brand identity for a wedding brand. +46% web conversions since launch.</p>
+            <div class="card-tags">
+              <span class="tag">Branding</span>
+              <span class="tag">Brand Strategy</span>
+            </div>
+          </div>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-text">
+        <h2 class="about-title reveal">I don't make logos.<br>I build identities.</h2>
+        <div class="about-body reveal">
+          <p>I'm a brand designer and creative director based in Barcelona. I work at the intersection of strategy and craft — developing visual systems that don't just look good, but actually mean something to the people who encounter them.</p>
+          <p>Currently building the brand ecosystem of <a href="https://gruprv.es" target="_blank" rel="noopener">Grup RV</a> from the inside. From holding company rebrands to specialty coffee concepts, the through-line is always the same: start with strategy, finish with something you can feel.</p>
+        </div>
+      </div>
+      <div class="about-image reveal">
+        <img src="images/portrait.jpg" alt="Mariana V. Rodriguez" loading="lazy" onerror="this.style.opacity='0'">
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-title reveal">Let's build something<br>worth remembering.</h2>
+      <div class="contact-links reveal">
+        <a href="mailto:hello@marianavrodriguez.com" class="contact-email">hello@marianavrodriguez.com</a>
+        <div class="social-links">
+          <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://behance.net/" target="_blank" rel="noopener">Behance</a>
         </div>
       </div>
     </div>
   </section>
 
-  <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('reveal-visible');
-        }
-      });
-    }, { threshold: 0.1 });
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-name">Mariana V. Rodriguez</p>
+      <p class="footer-copy">© 2026 — Brand Designer & Creative Director, Barcelona</p>
+    </div>
+  </footer>
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
