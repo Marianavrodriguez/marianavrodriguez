@@ -75,9 +75,6 @@
 
   <!-- WORK / CATEGORIES -->
   <section class="work" id="work">
-    <svg class="work-wave" viewBox="0 0 1920 420" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0,180 C 320,280 480,60 800,140 C 1120,220 1280,40 1600,120 C 1760,160 1840,190 1920,170 L1920,420 L0,420 Z" fill="#2C2F49"></path>
-    </svg>
     <div class="work-inner">
 
       <div class="category-image" id="cat-image-wrap">
@@ -98,6 +95,9 @@
           <span class="cat-arrow" aria-hidden="true">→</span>
           <span class="cat-label">Graphic Design</span>
         </div>
+        <!-- Temporarily hidden — Photography and Content Creation aren't
+             ready to launch yet. Un-comment to bring them back, and
+             restore the matching CATEGORIES entries in script.js.
         <div class="cat-item" data-img="images/cat-photography.jpg">
           <span class="cat-arrow" aria-hidden="true">→</span>
           <span class="cat-label">Photography</span>
@@ -106,10 +106,25 @@
           <span class="cat-arrow" aria-hidden="true">→</span>
           <span class="cat-label">Content Creation</span>
         </div>
+        -->
       </div>
 
     </div>
   </section>
+
+  <!-- CATEGORY POP-UP -->
+  <div class="cat-modal" id="cat-modal" aria-hidden="true">
+    <div class="cat-modal-backdrop" data-close></div>
+    <div class="cat-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cat-modal-title">
+      <button class="cat-modal-close" data-close aria-label="Close">&times;</button>
+      <img class="cat-modal-image" id="cat-modal-image" alt="" onerror="this.style.opacity='0'">
+      <div class="cat-modal-body">
+        <h3 class="cat-modal-title" id="cat-modal-title"></h3>
+        <p class="cat-modal-desc" id="cat-modal-desc"></p>
+        <div class="cat-modal-projects" id="cat-modal-projects"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- PROJECT CARDS -->
   <section class="projects" id="projects">
@@ -118,14 +133,14 @@
       <article class="project-card reveal">
         <a href="mod.html" class="card-link">
           <div class="card-image" style="--ph:#002D26">
-            <img src="images/mod.jpg" alt="mod." loading="lazy" onerror="this.style.opacity='0'">
+            <img src="images/mod.jpg" alt="mod" loading="lazy" onerror="this.style.opacity='0'">
             <div class="card-overlay">
               <p class="overlay-desc">Naming and visual identity for a specialty coffee corner inside Urbany Hostels Barcelona. Cups already in use.</p>
               <span class="overlay-btn">View project →</span>
             </div>
           </div>
           <div class="card-meta">
-            <p class="card-title">mod.</p>
+            <p class="card-title">mod</p>
             <p class="card-desc">Naming and visual identity for a specialty coffee corner inside Urbany Hostels.</p>
             <div class="card-tags">
               <span class="tag">Naming</span>
