@@ -44,12 +44,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   position: fixed; top: 0; left: 0;
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 22px;
+  font-size: 50px;
   line-height: 1;
   color: var(--lilac);
   pointer-events: none; z-index: 9999;
   user-select: none;
-  transform: translate(-3px, -11px) rotate(-30deg);
+  transform: translate(-3px, -11px) rotate(30deg);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.15s ease;
 }
@@ -113,8 +113,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .nav-burger {
   display: none;
   flex-direction: column; justify-content: center; gap: 5px;
-  width: 28px; height: 28px;
-  background: none; border: none; padding: 0; cursor: none;
+  /* 44x44 tap target (WCAG/Apple minimum) with 8px padding eaten out of
+     it via border-box, so the visible icon stays the original 28x28
+     while the hit area grows. */
+  width: 44px; height: 44px; padding: 8px;
+  background: none; border: none; cursor: none;
 }
 .nav-burger span {
   display: block; width: 100%; height: 2px;
@@ -156,7 +159,12 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* ─── HERO ───────────────────────────────────────────────── */
 .hero {
-  min-height: 100vh;
+  min-height: 100vh;  /* fallback for browsers without dvh support */
+  /* iOS Safari sizes 100vh against the large viewport even while its
+     toolbar is on-screen, so the marquee pinned to the bottom of this
+     section ends up hidden under the toolbar on load. 100dvh tracks
+     the actually-visible viewport instead. */
+  min-height: 100dvh;
   display: flex; flex-direction: column;
   padding-top: calc(var(--nav-h) + 40px);
 }
@@ -246,7 +254,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   aspect-ratio: 503 / 681;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 26px;
+  border-radius: 10px;
   overflow: hidden;
 }
 .category-image img {
@@ -314,7 +322,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   overflow-y: auto;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 26px;
+  border-radius: 10px;
   display: grid;
   grid-template-columns: 320px 1fr;
   transform: scale(0.96);
@@ -438,7 +446,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-radius: 6px;
 }
 
-.card-meta { display: flex; flex-direction: column; gap: 12px; }
+.card-meta { display: flex; flex-direction: column; gap: 8px; }
 .card-title {
   font-family: var(--font-display);
   font-size: 15px; font-weight: 700; color: var(--text);
@@ -492,7 +500,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   width: 100%; aspect-ratio: 503 / 681;
   background: var(--card-bg);
   border: 1px solid var(--border); overflow: hidden;
-  border-radius: 16px;
+  border-radius: 10px;
 }
 
 /* ─── CONTACT ────────────────────────────────────────────── */
@@ -544,7 +552,7 @@ footer { border-top: 1px solid var(--border); padding: 28px var(--px); }
   width: 100%;
   aspect-ratio: 16 / 10;
   background: var(--ph, var(--card-bg));
-  border-radius: 14px;
+  border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
 }
@@ -553,8 +561,8 @@ footer { border-top: 1px solid var(--border); padding: 28px var(--px); }
   width: 100%; height: 100%;
   object-fit: cover;
 }
-.case-image-block.lg { border-radius: 24px; aspect-ratio: 16 / 9.5; }
-.case-image-block.sq { aspect-ratio: 4 / 5; border-radius: 18px; }
+.case-image-block.lg { aspect-ratio: 16 / 9.5; }
+.case-image-block.sq { aspect-ratio: 4 / 5; }
 .case-image-block.case-video video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -725,7 +733,8 @@ footer { border-top: 1px solid var(--border); padding: 28px var(--px); }
 
 /* ─── COMING SOON (Photography) ──────────────────────────── */
 .coming-soon {
-  min-height: 100vh;
+  min-height: 100vh;  /* fallback for browsers without dvh support */
+  min-height: 100dvh;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
@@ -768,8 +777,17 @@ footer { border-top: 1px solid var(--border); padding: 28px var(--px); }
   .contact-links { flex-direction: column; align-items: flex-start; gap: 20px; }
   .footer-inner { flex-direction: column; gap: 8px; }
   .cursor { display: none; }
-  body, a { cursor: auto; }
-  .cat-modal-close, .cat-modal-project { cursor: auto; }
+  /* Every element that sets cursor:none for the custom arrow cursor
+     needs an explicit reset here — a bare `a { cursor: auto }` loses
+     to any of these on specificity, so it silently misses them and
+     the browser shows no cursor at all on a mouse/trackpad hovering
+     this breakpoint (the fake cursor above is hidden, and so is the
+     native one). */
+  body, a, button,
+  .btn-primary, .btn-ghost, .cat-item, .card-link, .case-nav-link,
+  .nav-burger, .cat-modal-close, .cat-modal-project {
+    cursor: auto;
+  }
   .cat-modal-panel { grid-template-columns: 1fr; min-height: auto; max-height: 92vh; }
   .cat-modal-image { aspect-ratio: 16 / 10; min-height: 0; }
   .cat-modal-body { padding: 28px; }
@@ -779,4 +797,55 @@ footer { border-top: 1px solid var(--border); padding: 28px var(--px); }
   .case-nav-inner { grid-template-columns: 1fr; }
   .case-nav-next { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 24px; align-items: flex-start; text-align: left; }
   .case-nav-prev { padding-right: 0; }
+
+  /* Project card: hover overlay doesn't work on touch, so drop the
+     long description (already echoed by .card-desc below the image)
+     and pin a small always-visible "View project" pill instead of
+     covering the whole photo. */
+  .card-overlay {
+    inset: auto 12px 12px auto;
+    background: none;
+    padding: 0;
+    opacity: 1;
+  }
+  .overlay-desc { display: none; }
+
+  /* Category title bar: overlaid on top of the image instead of
+     stacked below it. .work-inner is already position:relative and
+     .category-image is its first child, so pinning .category-list to
+     .work-inner's top edge lands it exactly over the image — no
+     markup changes needed. Grid auto-placement puts the eyebrow
+     (spanning all 3 columns) on row 1, then the three .cat-item
+     labels flow onto row 2 as one horizontal row — always visible
+     and tappable, not the desktop version's huge active-state
+     font-size swing (which wouldn't fit a compact bar). */
+  .category-list {
+    position: absolute; top: 0; left: 0; right: 0;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px 10px;
+    padding: 18px 18px 22px;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(to bottom, rgba(12, 11, 16, 0.8) 0%, rgba(12, 11, 16, 0) 100%);
+  }
+  .category-eyebrow {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+  .cat-item {
+    justify-content: center;
+    padding: 6px 2px;
+  }
+  .cat-arrow { display: none; }
+  .cat-label {
+    font-size: 11px;
+    line-height: 1.3;
+    white-space: normal;
+    text-align: center;
+  }
+  .cat-item.active .cat-label {
+    font-size: 11px;
+    color: var(--lilac);
+  }
 }

@@ -20,6 +20,23 @@
 
   function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+  // Locks .nav-name to the width of its widest state (the fully-typed
+  // name) so the link's box never grows/shrinks while typing. Without
+  // this, the box resizing under a stationary mouse retriggers
+  // mouseenter/mouseleave mid-animation (browsers re-run :hover hit
+  // testing on layout change, not just on mousemove) — expand and
+  // collapse would fire in a loop, which is what made the cursor get
+  // stuck blinking and swallowed clicks anywhere but over the fixed
+  // left edge (the "M").
+  function lockNavWidth() {
+    if (!navName) return;
+    const prevText = el.textContent;
+    navName.style.minWidth = '';
+    el.textContent = full;
+    navName.style.minWidth = navName.getBoundingClientRect().width + 'px';
+    el.textContent = prevText;
+  }
+
   // Types/deletes are cancellable: if a newer sequence has started
   // (runId moved on), the older one just stops where it is.
   async function typeTo(str, mine) {
@@ -95,6 +112,13 @@
     if (!(await typeTo(short, mine))) return;
     cur.classList.add('blink');
   }
+
+  lockNavWidth();
+  // Re-measure once the real webfont has swapped in — the fallback font
+  // active on first paint renders "Mariana Victoria" at a different
+  // width than Bricolage Grotesque does, which would leave the lock
+  // sized for the wrong font.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockNavWidth);
 
   introSequence().then(() => {
     setInterval(autoPeek, 60000);
