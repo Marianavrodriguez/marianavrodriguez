@@ -155,7 +155,7 @@ let cursorX = 0, cursorY = 0;
   document.addEventListener('mouseenter', () => cursor.classList.add('visible'));
   document.addEventListener('mouseleave', () => cursor.classList.remove('visible'));
 
-  document.querySelectorAll('a, .cat-item, .btn-primary, .btn-ghost, .cat-modal-close').forEach((el) => {
+  document.querySelectorAll('a, .cat-item, .btn-primary, .btn-ghost, .cat-modal-close, #cat-image-wrap').forEach((el) => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
   });
@@ -409,7 +409,18 @@ let cursorX = 0, cursorY = 0;
   let paused  = false;
 
   function activate(index) {
-    items.forEach((el, i) => el.classList.toggle('active', i === index));
+    const n = items.length;
+    items.forEach((el, i) => {
+      el.classList.toggle('active', i === index);
+      // Shortest signed circular distance from the active index, used
+      // by the mobile ticker (styles.css) to slide each label into a
+      // prev/active/next slot — the same 3 nodes just cycle roles
+      // rather than the strip actually scrolling.
+      let d = i - index;
+      if (d > n / 2) d -= n;
+      if (d < -n / 2) d += n;
+      el.dataset.slot = d === 0 ? 'active' : d === -1 ? 'prev' : d === 1 ? 'next' : 'hidden';
+    });
 
     if (catImg) {
       const src = items[index].dataset.img;
@@ -562,6 +573,18 @@ let cursorX = 0, cursorY = 0;
     });
     item.addEventListener('click', () => { activate(i); openModal(i); });
   });
+
+  // Tapping the photo itself opens the currently-active category —
+  // matters most on mobile, where the ticker's labels are the only
+  // other click target and it's not otherwise obvious the image is
+  // part of the same "tap for more" affordance (see .category-image-hint).
+  const imgWrap = document.getElementById('cat-image-wrap');
+  if (imgWrap) imgWrap.addEventListener('click', () => openModal(current));
+
+  // Sets data-slot on load — without this the mobile ticker's labels
+  // (which are opacity:0 until a data-slot role is assigned) would
+  // stay invisible until the first 3s rotation tick.
+  activate(current);
 
   setInterval(() => {
     if (!paused) activate((current + 1) % items.length);
